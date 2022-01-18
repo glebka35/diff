@@ -44,7 +44,7 @@ def my_dist(a, b):
     return dist
 
 def create_diff_file(fileName, path, a, b):
-    f = open(fileName, "wb")
+    f = open(fileName, "w")
     curPoint = path.pop()
     modifyingInProgress = False
     startModifyingInterval = 0
@@ -57,9 +57,9 @@ def create_diff_file(fileName, path, a, b):
 
         if curPoint[0] == prevPoint[0] + 1 and curPoint[1] == prevPoint[1] + 1 and a[curPoint[0] - 1] == b[curPoint[1] - 1]:
             if modifyingInProgress:
-                f.write(bytes('#' + str(startModifyingInterval) + '#' + str(endModifyingInterval) + '#' + str(len(changes)) + "#", 'utf-8'))
-                f.write(bytes(''.join(chr(e) for e in changes), 'utf-8'))
-                f.write(bytes('$', 'utf-8'))
+                f.write('#' + str(startModifyingInterval) + '#' + str(endModifyingInterval) + '#' + str(len(changes)) + "#")
+                f.write(''.join(chr(e) for e in changes))
+                f.write('$')
                 modifyingInProgress = False
                 changes = []
         elif curPoint[0] == prevPoint[0] + 1 and curPoint[1] == prevPoint[1] + 1 and a[curPoint[0] - 1] != b[curPoint[1] - 1]:
@@ -85,9 +85,9 @@ def create_diff_file(fileName, path, a, b):
             changes.append(b[curPoint[1] - 1])
 
     if modifyingInProgress:
-        f.write(bytes('#' + str(startModifyingInterval) + '#' + str(endModifyingInterval) + '#' + str(len(changes)) + "#", 'utf-8'))
-        f.write(bytes(''.join(chr(e) for e in changes), 'utf-8'))
-        f.write(bytes('$', 'utf-8'))
+        f.write('#' + str(startModifyingInterval) + '#' + str(endModifyingInterval) + '#' + str(len(changes)) + "#")
+        f.write(''.join(chr(e) for e in changes))
+        f.write('$')
 
     f.close()
 
