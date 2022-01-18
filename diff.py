@@ -1,7 +1,8 @@
 from sys import argv
 import numpy as np
 
-def createPath(a,b, dist):
+
+def createPath(a, b, dist):
     i = len(a)
     j = len(b)
     path = [(i, j)]
@@ -23,6 +24,7 @@ def createPath(a,b, dist):
                 j = j - 1
             elif nextPoint == dist[i-1][j] + 1:
                 path.append((i - 1, j))
+                i = i - 1
     return path
 
 
@@ -87,7 +89,6 @@ def create_diff_file(fileName, path, a, b):
         f.write(bytes(''.join(chr(e) for e in changes), 'utf-8'))
         f.write(bytes('$', 'utf-8'))
 
-    f.write(bytes('?', 'utf-8'))
     f.close()
 
 
